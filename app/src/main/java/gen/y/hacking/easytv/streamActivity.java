@@ -3,6 +3,7 @@ package gen.y.hacking.easytv;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.MediaController;
@@ -25,6 +26,7 @@ public class streamActivity extends ActionBarActivity {
             @Override
             public void run() {
                 myVideoView.setVideoURI(Uri.parse(urlStream));
+                myVideoView.start();
             }
         });
     }
