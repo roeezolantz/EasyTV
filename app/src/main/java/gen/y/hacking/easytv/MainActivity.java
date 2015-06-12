@@ -1,5 +1,6 @@
 package gen.y.hacking.easytv;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,6 +16,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         GoogleCloudMessaging gcm = new GoogleCloudMessaging();
+        startService(new Intent(this, MotionTracking.class));
     }
 
     @Override
@@ -37,5 +39,11 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(new Intent(this, MotionTracking.class));
     }
 }
