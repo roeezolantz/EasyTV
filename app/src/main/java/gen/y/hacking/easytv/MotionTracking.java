@@ -14,6 +14,7 @@ public class MotionTracking extends Service implements SensorEventListener {
     private SensorManager mSensorManager;
     private Sensor mSigMotion;
     public Boolean flag = false;
+    public Boolean vidFlag = false;
     public MotionTracking() {
 
 
@@ -40,9 +41,13 @@ public class MotionTracking extends Service implements SensorEventListener {
     public void onSensorChanged(SensorEvent sensorEvent) {
 
         if(flag) {
-            Intent dialogIntent = new Intent(this, streamActivity.class);
-            dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(dialogIntent);
+            if (!vidFlag) {
+                Intent dialogIntent = new Intent(this, FullscreenStreamActivity.class);
+                dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(dialogIntent);
+
+                vidFlag = true;
+            }
         }else{
             flag = true;
         }

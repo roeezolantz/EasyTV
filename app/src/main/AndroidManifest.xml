@@ -28,12 +28,20 @@
 
         <activity
             android:name=".streamActivity"
-            android:label="@string/title_activity_stream" >
+            android:label="@string/title_activity_stream"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".FullscreenStreamActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_fullscreen_stream"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/FullscreenTheme" >
         </activity>
     </application>
 

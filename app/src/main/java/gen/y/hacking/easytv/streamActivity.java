@@ -3,9 +3,12 @@ package gen.y.hacking.easytv;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.MediaController;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 
@@ -21,10 +24,17 @@ public class streamActivity extends ActionBarActivity {
         MediaController mc = new MediaController(this);
         myVideoView.setMediaController(mc);
         urlStream = "http://str81.creacast.com/weo/smil:weo.smil/playlist.m3u8";
+        DisplayMetrics metrics = new DisplayMetrics(); getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        android.widget.RelativeLayout.LayoutParams params = (android.widget.RelativeLayout.LayoutParams) myVideoView.getLayoutParams();
+        params.width =  metrics.widthPixels;
+        params.height = metrics.heightPixels;
+        params.leftMargin = 0;
+        myVideoView.setLayoutParams(params);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 myVideoView.setVideoURI(Uri.parse(urlStream));
+                myVideoView.start();
             }
         });
     }
