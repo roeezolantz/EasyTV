@@ -72,6 +72,7 @@ public class MotionTracking extends Service implements SensorEventListener {
                                 .setPriority(Notification.PRIORITY_HIGH)
                                 .setContentText("Keep watching on your phone")
                                 .setAutoCancel(true)
+                                .setDefaults(Notification.DEFAULT_VIBRATE)
                                 .setStyle(new NotificationCompat.BigTextStyle()
                                         .bigText("Keep watching on your phone"))
                                 .addAction(R.drawable.abc_ic_clear_mtrl_alpha,
