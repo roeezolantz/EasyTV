@@ -4,6 +4,8 @@ import gen.y.hacking.easytv.util.SystemUiHider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 import android.view.Window;
 import android.widget.MediaController;
+import android.widget.ProgressBar;
 import android.widget.VideoView;
 
 
@@ -145,6 +148,12 @@ public class FullscreenStreamActivity extends Activity {
                 myVideoView.start();
             }
         });
+
+//        while (!myVideoView.isPlaying()) {
+//
+//        }
+
+        //((ProgressBar) findViewById(R.id.progBar)).setVisibility(View.GONE);
     }
 
     @Override
@@ -217,5 +226,19 @@ public class FullscreenStreamActivity extends Activity {
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        android.widget.FrameLayout.LayoutParams params = (android.widget.FrameLayout.LayoutParams) myVideoView.getLayoutParams();
+        params.width =  metrics.widthPixels;
+        params.height = metrics.heightPixels;
+        params.leftMargin = 0;
+        myVideoView.setLayoutParams(params);
     }
 }
