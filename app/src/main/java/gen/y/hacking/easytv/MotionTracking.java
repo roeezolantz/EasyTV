@@ -13,6 +13,7 @@ import android.widget.Toast;
 public class MotionTracking extends Service implements SensorEventListener {
     private SensorManager mSensorManager;
     private Sensor mSigMotion;
+    public Boolean flag = false;
     public MotionTracking() {
 
 
@@ -20,7 +21,7 @@ public class MotionTracking extends Service implements SensorEventListener {
 
     @Override
     public void onCreate() {
-        Log.i("service","service started!!");
+        Log.i("service", "service started!!");
         super.onCreate();
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         mSigMotion = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
@@ -38,7 +39,13 @@ public class MotionTracking extends Service implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
 
-        Log.i("SERVICE", "WALKING!@#");
+        if(flag) {
+            Intent dialogIntent = new Intent(this, streamActivity.class);
+            dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(dialogIntent);
+        }else{
+            flag = true;
+        }
     }
     //
     @Override
