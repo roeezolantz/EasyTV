@@ -1,27 +1,26 @@
 package gen.y.hacking.easytv;
 
-import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
-public class MainActivity extends ActionBarActivity {
+public class WelcomeActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        startService(new Intent(this, MotionTracking.class));
+        setContentView(R.layout.activity_welcome);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_welcome, menu);
         return true;
     }
 
@@ -40,9 +39,15 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        stopService(new Intent(this, MotionTracking.class));
+    public void logIn(View view) {
+        String txtComigoText = ((com.rengwuxian.materialedittext.MaterialEditText) findViewById(R.id.txtCode)).getText().toString();
+
+        if (!txtComigoText.equals("")) {
+            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            i.putExtra("comigo_key", txtComigoText);
+            startActivity(i);
+        }
+        else
+            Toast.makeText(this, "Please fill your COMIGO's code below", Toast.LENGTH_SHORT).show();
     }
 }
