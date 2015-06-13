@@ -67,10 +67,12 @@ public class MotionTracking extends Service implements SensorEventListener {
 
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(this)
-                                .setSmallIcon(R.mipmap.ic_launcher)
+                                .setSmallIcon(R.mipmap.logo3)
                                 .setContentTitle("EasyTv")
                                 .setPriority(Notification.PRIORITY_HIGH)
                                 .setContentText("Keep watching on your phone")
+                               //.setLargeIcon(R.mipmap.logo2)
+
                                 .setAutoCancel(true)
                                 .setDefaults(Notification.DEFAULT_VIBRATE)
                                 .setStyle(new NotificationCompat.BigTextStyle()
