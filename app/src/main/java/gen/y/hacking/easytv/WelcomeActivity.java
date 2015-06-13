@@ -1,12 +1,17 @@
 package gen.y.hacking.easytv;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class WelcomeActivity extends ActionBarActivity {
 
@@ -43,9 +48,25 @@ public class WelcomeActivity extends ActionBarActivity {
         String txtComigoText = ((com.rengwuxian.materialedittext.MaterialEditText) findViewById(R.id.txtCode)).getText().toString();
 
         if (!txtComigoText.equals("")) {
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            final Intent i = new Intent(getApplicationContext(), MainActivity.class);
             i.putExtra("comigo_key", txtComigoText);
-            startActivity(i);
+
+            final SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
+            pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+            pDialog.setTitleText("Connected to the COMIGO!");
+            pDialog.setCancelable(true);
+
+            final Activity curr = this;
+
+            pDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                @Override
+                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                    pDialog.dismissWithAnimation();
+                    startActivity(i);
+                }
+            });
+
+            pDialog.show();
         }
         else
             Toast.makeText(this, "Please fill your COMIGO's code below", Toast.LENGTH_SHORT).show();

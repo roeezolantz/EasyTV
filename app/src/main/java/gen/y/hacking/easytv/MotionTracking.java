@@ -25,8 +25,6 @@ public class MotionTracking extends Service implements SensorEventListener {
     public  NotificationManager mNotifyMgr;
 
     public MotionTracking() {
-
-
     }
 
     @Override
@@ -98,16 +96,16 @@ public class MotionTracking extends Service implements SensorEventListener {
 
                 // Sets an ID for the notification
                 int mNotificationId = 2;
-// Gets an instance of the NotificationManager service
+                // Gets an instance of the NotificationManager service
                 mNotifyMgr =
                         (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-// Builds the notification and issues it.
+                // Builds the notification and issues it.
                 mNotifyMgr.notify(mNotificationId, mBuilder.build());
                 vidFlag = true;
             }
-    }else{
-            flag = true;
-        }
+        } else {
+                flag = true;
+            }
 
     }
     //
